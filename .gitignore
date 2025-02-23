@@ -1,0 +1,9 @@
+# Xcode
+build/*
+xcuserdata
+*.xccheckout
+*.xcuserstate
+*.xcworkspace
+
+# macOS
+.DS_Store
