@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import CoreApiClient
 
 @main
 struct iAppDemoApp: App {
+    let apiClient = APIClient(environment: APIEnvironmentDev())
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GalleryView(viewModel: GalleryViewModel(apiClient: apiClient))
         }
     }
 }
