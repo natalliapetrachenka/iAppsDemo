@@ -9,8 +9,10 @@ import SwiftUI
 import CoreApiClient
 
 struct GalleryView: View {
-    @State private var selectedItem: HorizontalGalleryDetailsItem?
+    @State private var selectedItem: GalleryDetailsItem?
     let viewModel: GalleryViewModel
+
+    private let horizontalGalleryViewHeight: CGFloat = 180.0
 
     var body: some View {
         List(viewModel.categories, id: \.self) { category in
@@ -18,12 +20,12 @@ struct GalleryView: View {
                                                                   category: category)
             HorizontalGalleryView(viewModel: horizontalGalleryVM1,
                                   selectedItem: $selectedItem)
-            .frame(height: 180)
+            .frame(height: horizontalGalleryViewHeight)
         }
         .listStyle(.plain)
         .fullScreenCover(item: $selectedItem) { item in
-            let horizontalGalleryDetailsVM = HorizontalGalleryDetailsViewModel(item: item)
-            HorizontalGalleryDetailsView(viewModel: horizontalGalleryDetailsVM)
+            let horizontalGalleryDetailsVM = GalleryDetailsViewModel(item: item)
+            GalleryDetailsView(viewModel: horizontalGalleryDetailsVM)
         }
     }
 }

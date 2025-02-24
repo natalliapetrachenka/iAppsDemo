@@ -10,7 +10,7 @@ import CoreApiClient
 
 class HorizontalGalleryViewModel: ObservableObject {
     @Published var galleryTitle: String
-    @Published var items: [HorizontalGalleryDetailsItem]?
+    @Published var items: [GalleryDetailsItem]?
 
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
@@ -34,7 +34,7 @@ class HorizontalGalleryViewModel: ObservableObject {
 
             await MainActor.run {
                 self.items = gallery.items.map {
-                    return HorizontalGalleryDetailsItem(title: $0.title,
+                    return GalleryDetailsItem(title: $0.title,
                                                         link: $0.link,
                                                         media: $0.media,
                                                         dateTaken: $0.dateTaken,

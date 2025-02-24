@@ -1,5 +1,5 @@
 //
-//  HorizontalGalleryDetailsItem.swift
+//  GalleryDetailsItem.swift
 //  iAppDemo
 //
 //  Created by Natallia Petrachenka on 23.02.25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HorizontalGalleryDetailsItem: Hashable, Identifiable {
+struct GalleryDetailsItem: Hashable, Identifiable {
     var id: String { link.absoluteString }
     let title: String
     let link: URL
@@ -19,7 +19,7 @@ struct HorizontalGalleryDetailsItem: Hashable, Identifiable {
     let tags: String
 }
 
-extension HorizontalGalleryDetailsItem {
+extension GalleryDetailsItem {
 
     var horizontalGalleryCellItem: HorizontalGalleryCellItem {
         return HorizontalGalleryCellItem(title: title, imageUrl: media)

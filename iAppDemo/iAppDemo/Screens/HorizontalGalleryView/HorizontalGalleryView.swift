@@ -10,10 +10,16 @@ import CoreApiClient
 
 struct HorizontalGalleryView: View {
     @ObservedObject private var viewModel: HorizontalGalleryViewModel
-    @Binding var selectedItem: HorizontalGalleryDetailsItem?
+    @Binding var selectedItem: GalleryDetailsItem?
+
+    private let horizontalGalleryCellSize = CGSize(width: 120, height: 140)
+    private let horizontalGalleryCellSpacing: CGFloat = 8
+    private let titleTopPadding: CGFloat = 10
+    private let titleBottomPadding: CGFloat = 4
+    private let titleHorizontalPadding: CGFloat = 8
 
     init(viewModel: HorizontalGalleryViewModel,
-         selectedItem: Binding<HorizontalGalleryDetailsItem?>) {
+         selectedItem: Binding<GalleryDetailsItem?>) {
         self.viewModel = viewModel
         _selectedItem = selectedItem
     }
@@ -32,25 +38,23 @@ struct HorizontalGalleryView: View {
             } else {
                 if let items = viewModel.items {
                     VStack(alignment: .leading, spacing: 0) {
-                        Spacer()
-                            .frame(height: 10)
-
                         Text(viewModel.galleryTitle)
                             .font(.title3)
                             .bold()
                             .foregroundColor(.black)
-                            .offset(x: 20)
-
-                        Spacer()
-                            .frame(height: 4)
+                            .padding(EdgeInsets(top: titleTopPadding,
+                                                leading: titleHorizontalPadding,
+                                                bottom: titleBottomPadding,
+                                                trailing: titleHorizontalPadding))
 
                         ScrollView(.horizontal) {
-                            LazyHStack(spacing: 8) {
+                            LazyHStack(spacing: horizontalGalleryCellSpacing) {
                                 ForEach(items, id: \.self) { item in
                                     HorizontalGalleryCell(item: item.horizontalGalleryCellItem) {
                                         selectedItem = item
                                     }
-                                    .frame(width: 120, height: 140)
+                                    .frame(width: horizontalGalleryCellSize.width,
+                                           height: horizontalGalleryCellSize.height)
                                 }
                             }
                             .padding()
@@ -70,7 +74,7 @@ struct HorizontalGalleryView: View {
 }
 
 #Preview {
-    @Previewable @State var selectedItem: HorizontalGalleryDetailsItem?
+    @Previewable @State var selectedItem: GalleryDetailsItem?
     let viewModel = HorizontalGalleryViewModel(apiClient: APIClient(environment: APIEnvironmentDev()),
                                                category: "Paris")
     HorizontalGalleryView(viewModel: viewModel,

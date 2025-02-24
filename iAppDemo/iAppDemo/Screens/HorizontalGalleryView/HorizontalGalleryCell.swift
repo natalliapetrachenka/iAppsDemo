@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct HorizontalGalleryCell: View {
-    private var item: HorizontalGalleryCellItem
-    private var tapAction: (() -> ())?
-    private let imageSize = CGSize(width: 80, height: 80)
+    private let item: HorizontalGalleryCellItem
+    private let tapAction: (() -> ())?
+    private let imageSize: CGSize = CGSize(width: 80, height: 80)
+    private let topImageSpacing: CGFloat = 10.0
+    private let bottomImageSpacing: CGFloat = 8.0
+    private let imageCornerRadius: CGFloat = 10.0
+
     @ObservedObject private var imageLoader: AsyncImageLoader
 
     init(item: HorizontalGalleryCellItem, tapAction: (() -> ())?) {
@@ -26,22 +30,23 @@ struct HorizontalGalleryCell: View {
         }) {
             VStack(spacing: 0) {
                 Spacer()
-                    .frame(height: 10)
+                    .frame(height: topImageSpacing)
 
                 if let image = imageLoader.image {
                     image
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
                         .frame(width: imageSize.width, height: imageSize.height)
-                        .background(Color.gray)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .clipShape(RoundedRectangle(cornerRadius: imageCornerRadius))
                 } else {
-                    Color.gray.frame(width: imageSize.width,
-                                     height: imageSize.height)
+                    Color.gray
+                        .frame(width: imageSize.width,
+                               height: imageSize.height)
+                        .clipShape(RoundedRectangle(cornerRadius: imageCornerRadius))
                 }
 
                 Spacer()
-                    .frame(height: 8)
+                    .frame(height: bottomImageSpacing)
 
                 Text(item.title)
                     .font(.footnote)
