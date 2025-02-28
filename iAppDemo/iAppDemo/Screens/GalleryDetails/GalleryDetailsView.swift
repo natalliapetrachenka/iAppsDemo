@@ -28,7 +28,7 @@ struct GalleryDetailsView: View {
 
     private let audioTrackHeight: CGFloat = 10
 
-    private let spacerHeight: CGFloat = 3
+    private let spacerHeight: CGFloat = 1
 
     private let fullAudioPlayerHeight: CGFloat
 
@@ -65,13 +65,17 @@ struct GalleryDetailsView: View {
 
                 VStack(spacing: 0) {
                     AudioPlayerView(details: viewModel.audioDetails,
-                                    proxy: proxy,
                                     maxPlayerHeight: maxPlayerHeight,
                                     minPlayerHeight: minPlayerHeight,
                                     audioTrackHeight: audioTrackHeight,
                                     separatorHeight: spacerHeight,
                                     backgroundColor: .gray,
                                     isExpanded: $isExpanded)
+                    .padding(EdgeInsets(top: 0,
+                                        leading: proxy.safeAreaInsets.leading,
+                                        bottom: 0,
+                                        trailing: proxy.safeAreaInsets.trailing))
+                    
                     Spacer()
                         .frame(height: isPlayerPresented ? bottomBarHeight : bottomBarHeight - fullAudioPlayerHeight)
                 }

@@ -28,7 +28,6 @@ extension AsyncImageLoader {
         task?.cancel()
     }
 
-
     private func loadImage() {
         task?.cancel()
 
