@@ -10,7 +10,6 @@ import SwiftUI
 
 struct GalleryDetailsView: View {
     @ObservedObject private var viewModel: GalleryDetailsViewModel
-    @ObservedObject private var imageLoader: AsyncImageLoader
     @State private var imageOpacity: CGFloat = 0
     @State private var isPlayerPresented: Bool = false
 
@@ -36,7 +35,6 @@ struct GalleryDetailsView: View {
 
     init(viewModel: GalleryDetailsViewModel) {
         self.viewModel = viewModel
-        self.imageLoader = AsyncImageLoader(url: viewModel.item.media)
 
         fullAudioPlayerHeight = audioTrackHeight + minPlayerHeight
     }

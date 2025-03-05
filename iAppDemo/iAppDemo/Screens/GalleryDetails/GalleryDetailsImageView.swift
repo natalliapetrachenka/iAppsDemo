@@ -37,5 +37,8 @@ struct GalleryDetailsImageView: View {
             }
             Spacer()
         }
+        .onDisappear {
+            imageLoader.cancel()
+        }
     }
 }
